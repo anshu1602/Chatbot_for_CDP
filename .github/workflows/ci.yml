@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     strategy:
       matrix:
@@ -26,8 +26,17 @@ jobs:
     - name: Install dependencies
       run: npm ci
       
+    - name: Type check
+      run: npx tsc --noEmit
+      
     - name: Run linting
       run: npm run lint
+      
+    - name: Run tests
+      run: npm test
+      
+    - name: Build
+      run: npm run build
       
     - name: Build
       run: npm run build
